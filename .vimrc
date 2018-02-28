@@ -95,3 +95,5 @@ function! Sass(...)
   endif
   :execute "!sass -t " . type . " " . bufname("%") . " " . target
 endfunction
+
+autocmd VimEnter * NERDTree
