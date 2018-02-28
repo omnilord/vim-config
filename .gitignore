@@ -1,0 +1,6 @@
+bundle
+
+**.sw*
+.netrwhist
+
+**matchit*
