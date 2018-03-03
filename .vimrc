@@ -96,10 +96,20 @@ function! Sass(...)
   :execute "!sass -t " . type . " " . bufname("%") . " " . target
 endfunction
 
-function! FlipflopNERDTreeIsOpen()
+function! BringMyNERDTree(...)
+  let treenr = a:0 == 0 ? '1' : a:1
+  execute "vert sb NERD_Tree_" . treenr
+  vert resize 31
   wincmd w
-  if (expand('%:p') == "")
+endfunction
+:command Mytree call BringMyNERDTree()
+
+function! FlipflopNERDTreeIsOpen(...)
+  if (exists("b:NERDTree"))
     wincmd w
+    if (expand('%:p') == "")
+      wincmd w
+    endif
   endif
 endfunction
 
@@ -109,7 +119,10 @@ function! CloseOutIfOnlyNERDTree()
   endif
 endfunction
 
+
 let NERDTreeShowHidden=1
 autocmd VimEnter * NERDTree
 autocmd VimEnter * call FlipflopNERDTreeIsOpen()
-autocmd bufenter * call CloseOutIfOnlyNERDTree()
+autocmd TabEnter * call BringMyNERDTree()
+autocmd BufEnter * call CloseOutIfOnlyNERDTree()
+
