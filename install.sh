@@ -19,4 +19,9 @@ git clone git://github.com/scrooloose/nerdtree.git
 echo -e "\nexport VIMINIT='source \$MYVIMRC'" >> $BASH_CONFIG_FILE
 echo "export MYVIMRC='~/.vim/.vimrc'" >> $BASH_CONFIG_FILE
 
+vim -u NONE -c "helptags nerdtree/doc" -c q
+vim -u NONE -c "helptags tlib_vim/doc" -c q
+vim -u NONE -c "helptags vim-addon-mw-utils/doc" -c q
 vim -u NONE -c "helptags vim-rails/doc" -c q
+vim -u NONE -c "helptags vim-ruby/doc" -c q
+vim -u NONE -c "helptags vim-snipmate/doc" -c q
