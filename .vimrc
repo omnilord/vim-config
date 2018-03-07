@@ -126,3 +126,8 @@ autocmd VimEnter * call FlipflopNERDTreeIsOpen()
 autocmd TabEnter * call BringMyNERDTree()
 autocmd BufEnter * call CloseOutIfOnlyNERDTree()
 
+
+
+noremap :py :!py %:p
+noremap :rb :!ruby %:p
+noremap :rc :!rubocop %:p
