@@ -96,16 +96,38 @@ function! Sass(...)
   :execute "!sass -t " . type . " " . bufname("%") . " " . target
 endfunction
 
-function! BringMyNERDTree(...)
-  let treenr = a:0 == 0 ? '1' : a:1
-  execute "vert sb NERD_Tree_" . treenr
-  vert resize 31
-  wincmd w
+function! BufferTabIndex(buf)
+  let buffers = tabpagebuflist(tabpagenr())
+  let buffernames = map(copy(buffers), {key, val -> bufname(val)})
+  return index(buffernames, a:buf)
 endfunction
-:command Mytree call BringMyNERDTree()
+
+function! BringMyNERDTree(...)
+  "
+  " If NERDTree isn't already on this tab, open it
+  "
+
+  let treenr = a:0 == 0 ? '1' : a:1
+  let nerd_buf = "NERD_tree_" . treenr
+
+  if exists("g:Use_NERDTree") && !exists("t:NERDTree_was_opened")
+    execute "vert sb " . nerd_buf
+    vert resize 31
+    wincmd w
+    let t:NERDTree_was_opened = 1
+  endif
+
+  let g:Use_NERDTree = (BufferTabIndex(nerd_buf) >= 0)
+endfunction
 
 function! FlipflopNERDTreeIsOpen(...)
-  if (exists("b:NERDTree"))
+  "
+  " When opening Vim, set focus on the correct window panel
+  "
+
+  if exists("b:NERDTree")
+    let g:Use_NERDTree = 1
+    let t:NERDTree_was_opened = 1
     wincmd w
     if (expand('%:p') == "")
       wincmd w
@@ -118,7 +140,6 @@ function! CloseOutIfOnlyNERDTree()
     q
   endif
 endfunction
-
 
 let NERDTreeShowHidden=1
 autocmd VimEnter * NERDTree
