@@ -149,6 +149,13 @@ autocmd BufEnter * call CloseOutIfOnlyNERDTree()
 
 
 
-noremap :py :!py %:p
-noremap :rb :!ruby %:p
-noremap :rc :!rubocop %:p
+function! RunMyScript(cmd)
+  let fpath = fnameescape(expand("%:p"))
+  execute ":!" . a:cmd . " " . fpath
+endfunction
+
+noremap :py :call RunMyScript("py")
+noremap :rb :call RunMyScript("ruby")
+noremap :rc :call RunMyScript("rubocop")
+noremap :rk :!rake
+noremap :bu :!bundle
