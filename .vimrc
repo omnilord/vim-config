@@ -158,4 +158,4 @@ noremap :py :call RunMyScript("py")
 noremap :rb :call RunMyScript("ruby")
 noremap :rc :call RunMyScript("rubocop")
 noremap :rk :!rake
-noremap :bu :!bundle
+noremap :bun :!bundle
