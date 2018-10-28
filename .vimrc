@@ -46,6 +46,7 @@ au BufNewFile,BufRead *.pclass,*.inc,*.ctp set filetype=php
 au BufNewFile,BufRead *.coffee set filetype=coffee
 au BufNewFile,BufRead *.ru,Gemfile*,*.jbuilder set filetype=ruby
 au BufNewFile,BufRead *.erb set filetype=eruby
+au BufNewFile,BufRead *.geojson set filetype=json
 au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif
 au BufNewFile *.pl 0r ~/.vim/templates/skeleton.pl|call ReplaceTemplateNotation()
 au BufNewFile *.pm 0r ~/.vim/templates/skeleton.pm|call ReplaceTemplateNotation()
