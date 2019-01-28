@@ -130,7 +130,8 @@ function! FlipflopNERDTreeIsOpen(...)
     let g:Use_NERDTree = 1
     let t:NERDTree_was_opened = 1
     wincmd w
-    if (expand('%:p') == "")
+    if (expand('%:p') != "" && filereadable(expand('%:p')))
+      NERDTreeFind %
       wincmd w
     endif
   endif
@@ -160,3 +161,4 @@ noremap :rb :call RunMyScript("ruby")
 noremap :rc :call RunMyScript("rubocop")
 noremap :rk :!rake
 noremap :bun :!bundle
+noremap :rt :call RunMyScript("rails test")
