@@ -144,6 +144,7 @@ function! CloseOutIfOnlyNERDTree()
 endfunction
 
 let NERDTreeShowHidden=1
+let NERDTreeIgnore = ['\..*\.sw.$']
 autocmd VimEnter * NERDTree
 autocmd VimEnter * call FlipflopNERDTreeIsOpen()
 autocmd TabEnter * call BringMyNERDTree()
@@ -157,8 +158,14 @@ function! RunMyScript(cmd)
 endfunction
 
 noremap :py :call RunMyScript("py")
+noremap :Py :call RunMyScript("py")
 noremap :rb :call RunMyScript("ruby")
+noremap :Rb :call RunMyScript("ruby")
 noremap :rc :call RunMyScript("rubocop")
+noremap :Rc :call RunMyScript("rubocop")
 noremap :rk :!rake
 noremap :bun :!bundle
 noremap :rt :call RunMyScript("rails test")
+noremap :Rt :call RunMyScript("rails test")
+
+map <F7> gg=G<C-o><C-o>
