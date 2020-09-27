@@ -41,6 +41,8 @@ noremap :wQA :wqa
 noremap :WQA :wqa
 noremap :WqA :wqa
 
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 au BufNewFile,BufRead *.pclass,*.inc,*.ctp set filetype=php
 au BufNewFile,BufRead *.coffee set filetype=coffee
@@ -151,21 +153,30 @@ autocmd TabEnter * call BringMyNERDTree()
 autocmd BufEnter * call CloseOutIfOnlyNERDTree()
 
 
-
-function! RunMyScript(cmd)
+function! RunMyScriptSimple(cmd)
   let fpath = fnameescape(expand("%:p"))
   execute ":!" . a:cmd . " " . fpath
 endfunction
 
-noremap :py :call RunMyScript("py")
-noremap :Py :call RunMyScript("py")
-noremap :rb :call RunMyScript("ruby")
-noremap :Rb :call RunMyScript("ruby")
-noremap :rc :call RunMyScript("rubocop")
-noremap :Rc :call RunMyScript("rubocop")
-noremap :rk :!rake
-noremap :bun :!bundle
-noremap :rt :call RunMyScript("rails test")
-noremap :Rt :call RunMyScript("rails test")
+function! RustScriptCompile()
+  let fpath = fnameescape(expand("%:p"))
+  execute ":!rustc " . fpath . "&& " . fnamemodify(fpath, ":r")
+endfunction
+
+noremap :py :call RunMyScriptSimple("py")
+noremap :Py :call RunMyScriptSimple("py")
+noremap :rb :call RunMyScriptSimple("ruby")
+noremap :Rb :call RunMyScriptSimple("ruby")
+noremap :brb :call RunMyScriptSimple("bundle exec ruby")
+noremap :Brb :call RunMyScriptSimple("bundle exec ruby")
+noremap :rc :call RunMyScriptSimple("bundle exec rubocop")
+noremap :Rc :call RunMyScriptSimple("bundle exec rubocop")
+noremap :rk :!bundle exec rake
+noremap :rkt :!bundle exec rake test
+noremap :bun :!bundle exec
+noremap :rt :call RunMyScriptSimple("bundle exec rails test")
+noremap :Rt :call RunMyScriptSimple("bundle exec rails test")
+noremap :rs :call RustScriptCompile()
+noremap :Rs :call RustScriptCompile()
 
 map <F7> gg=G<C-o><C-o>

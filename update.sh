@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp -R bundle bundle_bu
+cp -R bundle bundle_bu_$(date "+%m%d%H%M%Y.%S")
 
 for d in bundle/*
 do
