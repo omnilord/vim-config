@@ -1,5 +1,7 @@
 execute pathogen#infect()
 
+let g:snipMate = { 'snippet_version' : 1 }
+
 set nomodeline
 
 colorscheme Mine
@@ -84,6 +86,8 @@ function! StripTrailingWhitespaces()
   :%s/\s\+$//e
   call cursor(l, c)
 endfunction
+
+au BufWritePre *.{sh,cpp,conf,py,php,pclass,inc,pl,pm,c,h,cpp,hpp,rs,rb,ru,Gemfile*,jbuilder,erb,html,js,css,scss,less,json,geojson,yaml,yml,coffee,csv} call StripTrailingWhitespaces()
 
 function! Sass(...)
   silent !clear
