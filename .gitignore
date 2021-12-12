@@ -1,5 +1,7 @@
 bundle**
 
+autoload/pathogen.vim
+
 **.sw*
 .netrwhist
 
