@@ -120,6 +120,7 @@ function! BringMyNERDTree(...)
   if exists("g:Use_NERDTree") && !exists("t:NERDTree_was_opened")
     execute "vert sb " . nerd_buf
     vert resize 31
+    setl wfw
     wincmd w
     let t:NERDTree_was_opened = 1
   endif
