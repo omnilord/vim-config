@@ -157,6 +157,7 @@ autocmd VimEnter * call FlipflopNERDTreeIsOpen()
 autocmd TabEnter * call BringMyNERDTree()
 autocmd BufEnter * call CloseOutIfOnlyNERDTree()
 
+" autocmd vimenter * let &shell='/bin/zsh -i'
 
 function! RunMyScriptSimple(cmd)
   let fpath = fnameescape(expand("%:p"))
@@ -168,6 +169,8 @@ function! RustScriptCompile()
   execute ":!rustc " . fpath . "&& " . fnamemodify(fpath, ":r")
 endfunction
 
+noremap :js :call RunMyScriptSimple("node")
+noremap :Js :call RunMyScriptSimple("node")
 noremap :py :call RunMyScriptSimple("py")
 noremap :Py :call RunMyScriptSimple("py")
 noremap :rb :call RunMyScriptSimple("ruby")
