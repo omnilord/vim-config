@@ -137,7 +137,7 @@ function! FlipflopNERDTreeIsOpen(...)
     let g:Use_NERDTree = 1
     let t:NERDTree_was_opened = 1
     wincmd w
-    if (expand('%:p') != "" && filereadable(expand('%:p')))
+    if expand('%:p') != "" && filereadable(expand('%:p'))
       NERDTreeFind %
       wincmd w
     endif
@@ -145,8 +145,8 @@ function! FlipflopNERDTreeIsOpen(...)
 endfunction
 
 function! CloseOutIfOnlyNERDTree()
-  if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree())
-    q
+  if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()
+    quit
   endif
 endfunction
 
