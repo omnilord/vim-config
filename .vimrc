@@ -23,6 +23,7 @@ set smartindent
 set expandtab
 set tabstop=2
 set shiftwidth=2
+set re=0 " Slow (ex. Typescript) syntax highlighting fix
 match ExtraWS /\(\t\+\|\s\+$\)/
 
 vnoremap < <gv
@@ -51,7 +52,8 @@ au BufNewFile,BufRead *.coffee set filetype=coffee
 au BufNewFile,BufRead *.ru,Gemfile*,*.jbuilder set filetype=ruby
 au BufNewFile,BufRead *.erb set filetype=eruby
 au BufNewFile,BufRead *.geojson set filetype=json
-au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif
+au BufNewFile,BufRead *.ts set filetype=typescript
+au BufNewFile,BufRead /etc/nginx/*,/usr/local/nginx/conf/* if &ft == '' | setfiletype nginx | endif
 au BufNewFile *.pl 0r ~/.vim/templates/skeleton.pl|call ReplaceTemplateNotation()
 au BufNewFile *.pm 0r ~/.vim/templates/skeleton.pm|call ReplaceTemplateNotation()
 au BufNewFile *.test 0r ~/.vim/templates/skeleton.test|call ReplaceTemplateNotation()
@@ -87,7 +89,7 @@ function! StripTrailingWhitespaces()
   call cursor(l, c)
 endfunction
 
-au BufWritePre *.{sh,cpp,conf,py,php,pclass,inc,pl,pm,c,h,cpp,hpp,rs,rb,ru,Gemfile*,jbuilder,erb,html,js,css,scss,less,json,geojson,yaml,yml,coffee,csv} call StripTrailingWhitespaces()
+au BufWritePre *.{sh,cpp,conf,py,php,pclass,inc,pl,pm,c,h,cpp,hpp,rs,rb,ru,Gemfile*,jbuilder,erb,html,js,css,scss,less,json,geojson,yaml,yml,coffee,csv,ts} call StripTrailingWhitespaces()
 
 function! Sass(...)
   silent !clear
@@ -179,6 +181,7 @@ noremap :brb :call RunMyScriptSimple("bundle exec ruby")
 noremap :Brb :call RunMyScriptSimple("bundle exec ruby")
 noremap :rc :call RunMyScriptSimple("bundle exec rubocop")
 noremap :Rc :call RunMyScriptSimple("bundle exec rubocop")
+noremap :rspec :call RunMyScriptSimple("bundle exec rspec")
 noremap :rk :!bundle exec rake
 noremap :rkt :!bundle exec rake test
 noremap :bun :!bundle exec
